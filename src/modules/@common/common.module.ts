@@ -1,12 +1,15 @@
 import { Module, Global } from '@nestjs/common'
+import { PassportModule } from '@nestjs/passport'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 
 import { App, Orm, Token } from './config'
+import { RolesGuard, JwtAuthGuard } from './guards'
 
 @Global()
 @Module({
   imports: [
+    PassportModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
@@ -21,7 +24,10 @@ import { App, Orm, Token } from './config'
       }
     })
   ],
-  providers: [],
+  providers: [
+    { provide: 'APP_GUARD', useClass: JwtAuthGuard },
+    { provide: 'APP_GUARD', useClass: RolesGuard }
+  ],
   exports: []
 })
 export class CommonModule {}
