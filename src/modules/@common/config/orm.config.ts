@@ -15,6 +15,5 @@ export default registerAs('typeorm', () => ({
   ssl: {
     rejectUnauthorized: false
   },
-
   namingStrategy: new SnakeNamingStrategy()
 }))
