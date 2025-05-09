@@ -1,6 +1,17 @@
-import { Controller, Delete, Get, Param, Post, Put, Body } from '@nestjs/common'
+import { Request } from 'express'
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Body,
+  Req
+} from '@nestjs/common'
 
 import { CreateCompanyDto, NitDto } from './dto'
+import { TokenService } from '../@common/providers/token.service'
 import {
   CompanyCreateService,
   CompanyFindServices,
@@ -14,7 +25,8 @@ export class CompanyController {
     private readonly findService: CompanyFindServices,
     private readonly createService: CompanyCreateService,
     private readonly removeService: CompanyRemoveService,
-    private readonly updateService: CompanyUpdateService
+    private readonly updateService: CompanyUpdateService,
+    private readonly tokenService: TokenService
   ) {}
 
   @Get()
@@ -28,8 +40,11 @@ export class CompanyController {
   }
 
   @Post()
-  async create(@Body() company: CreateCompanyDto) {
-    return await this.createService.create(company)
+  async create(@Body() company: CreateCompanyDto, @Req() req: Request) {
+    return await this.createService.create(
+      company,
+      this.tokenService.GetTokenFromRequest(req)!
+    )
   }
 
   @Delete(':nit')
@@ -38,7 +53,15 @@ export class CompanyController {
   }
 
   @Put(':nit')
-  async update(@Param('nit') nit: NitDto, @Body() company: CreateCompanyDto) {
-    return await this.updateService.update(nit, company)
+  async update(
+    @Param('nit') nit: NitDto,
+    @Body() company: CreateCompanyDto,
+    @Req() req: Request
+  ) {
+    return await this.updateService.update(
+      nit,
+      company,
+      this.tokenService.GetTokenFromRequest(req)!
+    )
   }
 }

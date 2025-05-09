@@ -4,21 +4,36 @@ import {
   ConflictException,
   HttpStatus,
   Injectable,
-  InternalServerErrorException
+  InternalServerErrorException,
+  NotFoundException
 } from '@nestjs/common'
 
 import { CreateCompanyDto } from '../dto'
-import { CompanyEntity } from 'src/entities'
 import { ApiResponse } from 'src/global/interfaces'
+import { CompanyEntity, UserEntity } from 'src/entities'
+import { TokenService } from 'src/modules/@common/providers/token.service'
 
 @Injectable()
 export class CompanyCreateService {
   constructor(
     @InjectRepository(CompanyEntity)
-    private readonly companyRepository: Repository<CompanyEntity>
+    private readonly companyRepository: Repository<CompanyEntity>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+    private readonly tokenService: TokenService
   ) {}
 
-  async create(company: CreateCompanyDto): Promise<ApiResponse<boolean>> {
+  async create(
+    company: CreateCompanyDto,
+    token: string
+  ): Promise<ApiResponse<boolean>> {
+    const { email } = this.tokenService.GetInfoToken(token)!
+
+    const user = await this.userRepository.findOneBy({ email })
+
+    if (!user)
+      throw new NotFoundException('No existe ningún usuario con ese Username')
+
     const companyExists = await this.companyRepository.findOneBy({
       nit: company.nit
     })
@@ -28,7 +43,7 @@ export class CompanyCreateService {
         `La compañía con el NIT ${company.nit} ya existe`
       )
 
-    const result = await this.companyRepository.insert(company)
+    const result = await this.companyRepository.insert({ ...company, user })
 
     if (result.identifiers.length === 0)
       throw new InternalServerErrorException('No se pudo insertar la compañía')
