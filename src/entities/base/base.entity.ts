@@ -6,15 +6,20 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 
+import { Status } from '../types'
+
 @Index(['publicKey'], { unique: true })
 export abstract class BaseEntity {
   @Generated('uuid')
   @Column('uuid', { nullable: false })
-  public publicKey!: string
+  publicKey!: string
 
   @CreateDateColumn({ type: 'timestamp' })
-  public createAt!: string
+  createAt!: string
 
   @UpdateDateColumn({ type: 'timestamp' })
-  public updateAt!: string
+  updateAt!: string
+
+  @Column({ default: 'Activo' })
+  status: Status
 }
