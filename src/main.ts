@@ -18,7 +18,7 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3000, async () => {
     Logger.debug('Init app ', 'Test')
-    Logger.log(`🚀 Running on : ${await app.getUrl()}/v1/ 🚀 `, 'Log-Server')
+    Logger.log(`🚀 Running on : ${await app.getUrl()}/ 🚀 `, 'Log-Server')
   })
 }
 
