@@ -1,4 +1,4 @@
-export { CompanyCreateService } from './creates.service'
-export { CompanyFindsServices } from './finds.service'
-export { CompanyRemoveService } from './removes.service'
-export { CompanyUpdateService } from './updates.service'
+export { CompanyCreateService } from './create.service'
+export { CompanyFindServices } from './find.service'
+export { CompanyRemoveService } from './remove.service'
+export { CompanyUpdateService } from './update.service'
