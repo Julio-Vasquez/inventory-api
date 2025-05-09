@@ -1,3 +1,6 @@
+import helmet from 'helmet'
+import morgan from 'morgan'
+import compression from 'compression'
 import { NestFactory } from '@nestjs/core'
 import { ValidationPipe, Logger } from '@nestjs/common'
 import {
@@ -14,6 +17,9 @@ async function bootstrap() {
   )
 
   app.enableCors()
+  app.use(helmet())
+  app.use(morgan('dev'))
+  app.use(compression())
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }))
 
   await app.listen(process.env.PORT ?? 3000, async () => {
