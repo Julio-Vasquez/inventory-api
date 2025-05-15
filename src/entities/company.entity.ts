@@ -22,7 +22,7 @@ export class CompanyEntity extends BaseEntity {
   @Column('text', { nullable: false })
   address: string
 
-  @Column('int', { nullable: false })
+  @Column('bigint', { nullable: false })
   phone: string
 
   @Column('text', { nullable: false })
