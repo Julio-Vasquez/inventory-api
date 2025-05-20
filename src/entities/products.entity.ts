@@ -18,13 +18,13 @@ export class ProductsEntity extends BaseEntity {
   _id: string
 
   @Column()
-  nombre: string
+  name: string
 
   @Column({ type: 'jsonb', nullable: false })
   pricesByCurrency: PricesByCurrency[]
 
   @Column('int')
-  cantidad: number
+  quantity: number
 
   @Column({ type: 'text', array: true, nullable: false })
   characteristics: string[]

@@ -1,4 +1,4 @@
 export interface PricesByCurrency {
-  currency: string
+  currencyCode: string
   value: number
 }

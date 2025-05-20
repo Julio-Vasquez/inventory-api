@@ -32,12 +32,12 @@ export class ProductCreateService {
 
     const productExists = await this.productsRepository.findOneBy({
       status: 'Activo',
-      nombre: product.nombre
+      name: product.name
     })
 
     if (productExists)
       throw new ConflictException(
-        `El producto con el nombre ${product.nombre} ya existe`
+        `El producto con el nombre ${product.name} ya existe`
       )
 
     const result = await this.productsRepository.insert({ ...product, user })

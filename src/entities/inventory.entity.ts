@@ -1,4 +1,10 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn
+} from 'typeorm'
 
 import { BaseEntity } from './base'
 import { CompanyEntity } from './company.entity'
@@ -8,6 +14,9 @@ import { ProductsEntity } from './products.entity'
 export class InventoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   _id: string
+
+  @Column('int', { nullable: false })
+  quantity: number
 
   @ManyToOne(() => CompanyEntity, company => company.inventory, {
     nullable: false
@@ -19,5 +28,5 @@ export class InventoryEntity extends BaseEntity {
     nullable: false
   })
   @JoinColumn({ name: 'fk_product' })
-  product: CompanyEntity
+  product: ProductsEntity
 }

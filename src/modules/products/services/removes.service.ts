@@ -33,7 +33,7 @@ export class ProductRemoveService {
       )
 
     return {
-      message: 'producto eliminado correctamente',
+      message: 'Producto eliminado correctamente',
       statusCode: HttpStatus.OK,
       status: 'success',
       payload: true

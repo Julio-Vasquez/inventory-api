@@ -7,6 +7,7 @@ import { CompanyModule } from './modules/company/company.module'
 import { ProductsModule } from './modules/products/products.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { UserModule } from './modules/user/user.module'
+import { InventoryModule } from './modules/inventory/inventory.module'
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { UserModule } from './modules/user/user.module'
     AuthModule,
     CompanyModule,
     ProductsModule,
-    UserModule
+    UserModule,
+    InventoryModule
   ],
   controllers: [AppController],
   providers: [AppService]

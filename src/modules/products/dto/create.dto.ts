@@ -12,7 +12,7 @@ import {
 class PriceByCurrencyDto {
   @IsString()
   @IsNotEmpty()
-  moneda: string
+  currencyCode: string
 
   @IsNumber()
   @IsPositive()
@@ -22,11 +22,11 @@ class PriceByCurrencyDto {
 export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
-  nombre: string
+  name: string
 
   @IsNumber()
   @IsPositive()
-  cantidad: number
+  quantity: number
 
   @IsArray()
   @ValidateNested({ each: true })

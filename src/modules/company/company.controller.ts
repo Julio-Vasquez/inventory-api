@@ -35,7 +35,7 @@ export class CompanyController {
   }
 
   @Get(':nit')
-  async findByNit(@Param('nit') nit: NitDto) {
+  async findByNit(@Param() nit: NitDto) {
     return await this.findService.findByNit(nit)
   }
 
@@ -48,13 +48,13 @@ export class CompanyController {
   }
 
   @Delete(':nit')
-  async remove(@Param('nit') nit: NitDto) {
+  async remove(@Param() nit: NitDto) {
     return await this.removeService.remove(nit)
   }
 
   @Put(':nit')
   async update(
-    @Param('nit') nit: NitDto,
+    @Param() nit: NitDto,
     @Body() company: CreateCompanyDto,
     @Req() req: Request
   ) {

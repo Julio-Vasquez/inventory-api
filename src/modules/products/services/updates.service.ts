@@ -1,10 +1,10 @@
 import { Repository } from 'typeorm'
-import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
 
 import { CreateProductDto } from '../dto'
-import { ProductsEntity, UserEntity } from 'src/entities'
 import { ApiResponse } from 'src/global/interfaces'
+import { ProductsEntity, UserEntity } from 'src/entities'
 import { TokenService } from 'src/modules/@common/providers/token.service'
 
 @Injectable()

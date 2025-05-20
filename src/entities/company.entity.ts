@@ -17,7 +17,7 @@ export class CompanyEntity extends BaseEntity {
   nit: string
 
   @Column('varchar', { length: 50, nullable: false })
-  nombre: string
+  name: string
 
   @Column('text', { nullable: false })
   address: string

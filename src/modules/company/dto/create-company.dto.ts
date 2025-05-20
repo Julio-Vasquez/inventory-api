@@ -13,7 +13,7 @@ export class CreateCompanyDto {
 
   @IsString()
   @Length(1, 50)
-  readonly nombre: string
+  readonly name: string
 
   @IsString()
   @IsNotEmpty()
