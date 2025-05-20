@@ -20,6 +20,7 @@ export class InventoryFindServices {
       select: {
         _id: true,
         status: true,
+        quantity: true,
         product: {
           name: true,
           characteristics: true,

@@ -28,8 +28,8 @@ export class InventoryUpdateService {
       )
 
     const result = await this.inventoryRepository.update(
-      { _id, status: 'Activo' },
-      { ...inventory }
+      { _id },
+      { quantity: inventory.quantity }
     )
 
     if (result.affected === 0)
